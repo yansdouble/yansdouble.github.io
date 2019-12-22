@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深入理解JVM之初识java运行时数据区, yansdouble">
-    <meta name="description" content="深入理解JVM之初识java运行时数据区概述​        通俗来说就是运行时的所需要的内存的数据结构。java虚拟机在执行java程序的过程中会将它管理的内存划分为若干个不同的数据区域。这些区域我们称之为java运行时数据区域。图示如下">
+    <meta name="keywords" content="springboot中的事务回滚, yansdouble">
+    <meta name="description" content="springboot中的事务回滚事务回滚在企业级开发中实用较为频繁，近段时间使用到了，总结一下：
+首先在springboot中是集成了事务的回滚操作了，也就是@Transactional注解。事务的回滚有两种方式，一种是自动回滚，另一种是手">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>深入理解JVM之初识java运行时数据区 | yansdouble</title>
+    <title>springboot中的事务回滚 | yansdouble</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -264,13 +265,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        深入理解JVM之初识java运行时数据区
+                        springboot中的事务回滚
                     </div>
                 </div>
             </div>
@@ -362,16 +363,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/jvm/" target="_blank">
-                                <span class="chip bg-color">jvm</span>
+                            <a href="/tags/springboot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" target="_blank">
+                                <span class="chip bg-color">springboot事务回滚</span>
                             </a>
                         
-                            <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA/" target="_blank">
-                                <span class="chip bg-color">深入理解java虚拟机</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/" target="_blank">
-                                <span class="chip bg-color">运行时数据区</span>
+                            <a href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" target="_blank">
+                                <span class="chip bg-color">事务回滚</span>
                             </a>
                         
                     </div>
@@ -382,8 +379,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/jvm/" class="post-category" target="_blank">
-                                jvm
+                            <a href="/categories/java%E9%9A%8F%E7%AC%94/" class="post-category" target="_blank">
+                                java随笔
                             </a>
                         
                     </div>
@@ -394,21 +391,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-12-18
+                    2019-06-18
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        1.8k
+                        680
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                        6 Min
+                        2 Min
                     </div>
                     
                 
@@ -424,23 +421,80 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="深入理解JVM之初识java运行时数据区"><a href="#深入理解JVM之初识java运行时数据区" class="headerlink" title="深入理解JVM之初识java运行时数据区"></a>深入理解JVM之初识java运行时数据区</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>​        通俗来说就是运行时的所需要的内存的数据结构。java虚拟机在执行java程序的过程中会将它管理的内存划分为若干个不同的数据区域。这些区域我们称之为java运行时数据区域。图示如下：</p>
-<p><img src="https://yansweb.github.io/images/1.png" alt="image-20191208164646404"></p>
-<p>​         这里运行时数据区域分为两类，一个是线程私有，一个是公有。这里有必要详细说明一下：当.class文件加载进入运行时数据区时，理解为加载进入方法区以及堆中，当执行到当前类的方法时候，才会在栈中进行处理，并不是将文件加载进入运行时数据区的时候就已经存在栈内存。栈的先进后出原理，很容易帮助我们进行计算的操作，比如用栈实现计算器。在执行一个方法的时候，需要栈进行辅助，此时想象为计算器进行计算。而输入的数据，还没有点击计算之前，想象为数据存放在方法区以及堆中。</p>
-<h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>​          通俗来说就是一个记录执行到哪里的一个存储器。程序计数器是一块很小的内存空间，可理解为当前线程所执行的字节码行号指示器。如果看过字节码文件咋知道，一个方法，是存在行号的，所以程序计数器其实就是当前执行的行号，当完成当前操作时，去找当前行号的下一个行号。每一个方法都有自己的行号，因此在执行时，每一个线程都有自己的程序计数器。</p>
-<h4 id="java虚拟机栈"><a href="#java虚拟机栈" class="headerlink" title="java虚拟机栈"></a>java虚拟机栈</h4><p>​        直观来讲就是一个大的栈中存在很多小的栈来完成计算。虚拟机栈的数据结构是数据结构中的栈，满足FILO原则。虚拟机栈描述的是java方法执行的内存模型：每个方法在执行的时候都会创建一个栈帧用于存放局部变量区、操作数栈、动态链接、方法返回地址等。每一个方法从调用到完成的过程，就对应一个栈帧从虚拟机栈入栈到出栈的过程。</p>
-<p>​        这里也能解释一个东西，日常我们说，new对象是在堆中，栈中存放的是方法引用。举个例子吧，</p>
-<pre class=" language-java"><code class="language-java">User user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>想清楚上面的，先明白一点，这句话写在什么地方，肯定在你写这句话的方法（函数）中吧，可能是main方法，也可能是你业务中的某一个方法。方法的模版存放在方法区，在调用这个方法的时候，这个方法会被加载进入虚拟机栈的某个栈帧中，此时执行这句话的时候，由于栈空间很小，为了节约空间将这个new对象放在堆中完成创建，栈中的user来指向堆中创建的对象。所以此时栈存放的是堆中的那个数据的引用（也可理解为指针，但是java中没有指针），也称之为栈内存执行堆内存。啰嗦这一段，只是想让你有一个栈和堆的关系大概苗头。</p>
-<p>​        局部变量表存放了编译期间可知的基本数据类型（八种—-学过java都知道）、对象引用、returnAddress类型。</p>
-<p>​        栈空间也不是无限大的，当栈帧的数量过于多，也就是超过当前栈的最大深度（外面的大栈），就会抛出StackOverflowError的异常，当栈帧的容量过大，一般会先自动扩容，内部的小栈超过最大容量的时候，就会抛出OutOfMemoryError异常。  </p>
-<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><p>​        这个比较简单，就是在执行native方法的时候，调用本地方法。java中只要是方法，执行都需要栈来辅助。辅助本地方法的栈就叫本地方法栈，这也是唯一一个没有内存溢出的内存空间。</p>
-<h4 id="java堆"><a href="#java堆" class="headerlink" title="java堆"></a>java堆</h4><p>​        这个是最大的地方，是共享的内存区域，也被称之为GC堆。由于基本使用的都是分代算法，因此又分为，老年代和新生代。在细分就是Eden区、From区、to区、老年代区等。java堆是不连续的内存区域，只要逻辑上连续即可，就像我们磁盘空间一样，是可以扩展的，（通过-Xms和-Xmx来控制实现）。</p>
-<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>​        方法区与java堆一样，是各个线程共享的区域，它用于存储已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然java虚拟机规范把方法区描述为堆的一部分，但是它却有另一个别名Non-Heap(非堆)，目的应该是与java堆区分开来。当方法区无法满足内存分配的需求时，将抛出OutOfMemoryError异常。</p>
-<p>​        方法区为类加载进入的地方，存储类模版的地方。从性质上来看，一般对于类来说，加载进来存放，基本可以看做是一个大对象。即使某个方法中不运用了，其他方法仍然可能继续运用，感觉他就像堆中的老年代一样，它实际也属于堆中一部分，但是java虚拟机规范中将其区分开来。</p>
-<h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>​        看过字节码的人应该知道其中有一部分就是常量池，用于存放编译期生成的各种字面量和符号引用。类加载进来会放入方法区，常量池其实就是被加载到这个地方。运行时常量池除了保存class文件中描述的符号引用之外，还会把翻译出来的直接引用也存储到运行时常量池中。另一个特性就是具备动态性，并不要求常量一定只有编译期才会产生，也就是并不是只有提前在class文件常量池中的内容才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，一般利用较多的就是String的intern方法。</p>
-<h4 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h4><p>​        直接内存不是java虚拟机中的一部分，可以理解为就是计算机内存。这部分频繁使用，同样会造成OOM。显然，本机直接内存的分配不会受到java堆的大小限制，但是既然是内存，肯定还是会受到本机总内存大小限制。一般分配服务器内存时，通常会忽略这部分，会根据实际内存设置-Xmx等参数信息，但是经常忽略直接内存，是的各个内存区域总和大于物理内存限制，从而OOM。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>深入理解jvm这本书前面部分确实比较浅，根据书只能整理出这么多，后续逐渐章节深入，会持续进行学习整理。</p>
+                <h2 id="springboot中的事务回滚"><a href="#springboot中的事务回滚" class="headerlink" title="springboot中的事务回滚"></a>springboot中的事务回滚</h2><p>事务回滚在企业级开发中实用较为频繁，近段时间使用到了，总结一下：</p>
+<p>首先在springboot中是集成了事务的回滚操作了，也就是@Transactional注解。事务的回滚有两种方式，一种是自动回滚，另一种是手动回滚，下面对两种使用稍作总结。</p>
+<h3 id="1：自动回滚"><a href="#1：自动回滚" class="headerlink" title="1：自动回滚"></a>1：自动回滚</h3><p>首先回滚的方法必须是public的，其次在需要回滚的方法上添加@Transactional 这两者为前提条件。自动回滚当然是在发生异常才会回滚，大部分都会强调只能捕获RuntimeException，也就是非检查型异常。这个是没问题的，但是如果不是RuntimeException,你就必须进行处理，也就是捕获，否则程序根本无法正常，不报错。什么意思呢，意思就是没有处理的异常抛出了，才会进行自动回滚。如下：</p>
+<p>失败案列1：</p>
+<pre class=" language-java"><code class="language-java">    <span class="token annotation punctuation">@Override</span>
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> Boolean <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//第一次插入，教师表</span>
+            Teacher teacher <span class="token operator">=</span> teacherService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>teacher <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//第二次插入，学生表</span>
+            <span class="token keyword">int</span> result <span class="token operator">=</span> studentMapper<span class="token punctuation">.</span><span class="token function">insertSelective</span><span class="token punctuation">(</span>student<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>这里是失败的，当抛出异常之后，异常被catch住了，当然不是没有抛出非检查异常的原因，而是被捕获的异常被处理了，处理后程序默认为处理完成了，就不是异常了，那么正常入库，所以没有回滚。</p>
+<p>成功案列：</p>
+<pre class=" language-java"><code class="language-java">    <span class="token annotation punctuation">@Override</span>
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> Boolean <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//第一次插入，教师表</span>
+            Teacher teacher <span class="token operator">=</span> teacherService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>teacher <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//第二次插入，学生表</span>
+            <span class="token keyword">int</span> result <span class="token operator">=</span> studentMapper<span class="token punctuation">.</span><span class="token function">insertSelective</span><span class="token punctuation">(</span>student<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//唯一区别，在这里</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>在捕获异常的基础上，又抛出了异常，而这次是非检查型异常，就会被回滚了，默认执行到这里，该方法程序出现错误，那么取消本次入库。这里当然你也可以试试在catch中抛出检查型异常试试，你就会明白我说的，报错是什么意思了。</p>
+<h4 id="2：手动回滚"><a href="#2：手动回滚" class="headerlink" title="2：手动回滚"></a>2：手动回滚</h4><p>添加TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 语句，这个便是手动回滚语句。</p>
+<pre class=" language-java"><code class="language-java">    <span class="token annotation punctuation">@Override</span>
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> Boolean <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//第一次插入，教师表</span>
+            Teacher teacher <span class="token operator">=</span> teacherService<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>teacher <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//第二次插入，学生表</span>
+            <span class="token keyword">int</span> result <span class="token operator">=</span> studentMapper<span class="token punctuation">.</span><span class="token function">insertSelective</span><span class="token punctuation">(</span>student<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//唯一区别，在这里</span>
+            TransactionAspectSupport<span class="token punctuation">.</span><span class="token function">currentTransactionStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setRollbackOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>这是手动回滚的例子，其实也不一定非要在catch中添加手动回滚的语句，你同样可以在任何一个地方进行判断然后使用手动回滚语句，会继续之后语句后的所有方法，但是不建议这么使用。</p>
 
             </div>
             <hr/>
@@ -581,7 +635,7 @@
                     </span>
                     <a href="https://yansweb.github.io" class="b-link-green">yansdouble</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/12/18/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E4%B9%8B%E5%88%9D%E8%AF%86java%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/index/" class="b-link-green">深入理解JVM之初识java运行时数据区</a>
+                    <a href="/2019/06/18/springboot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/index/" class="b-link-green">springboot中的事务回滚</a>
                 </p>
             </div>
         </div>
@@ -606,49 +660,28 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/12/22/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E4%B9%8Bclass%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/index/">
+                <a href="/2019/12/16/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="深入理解JVM之class文件结构">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">深入理解JVM之class文件结构</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">深入理解JVM之class文件结构概述​        虽然class文件结构很枯燥，但是如果你对这个一点都不了解，也是不行的，我还是硬着头皮看了看，我总结一下这玩意到底是怎么玩的。
-初识.class​        都知道java文件编译</div>
+                    <div class="summary">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-22
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-16
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/jvm/" class="post-category" target="_blank">
-                                    jvm
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            double
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/jvm/" target="_blank">
-                        <span class="chip bg-color">jvm</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA/" target="_blank">
-                        <span class="chip bg-color">深入理解java虚拟机</span>
-                    </a>
-                    
-                    <a href="/tags/class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_blank">
-                        <span class="chip bg-color">class文件结构</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -657,25 +690,24 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fa fa-chevron-right"></i>
+                Current&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/16/ArrayList%E7%9A%84remove/index/">
+                <a href="/2019/06/18/springboot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/index/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="ArrayList的remove">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="springboot中的事务回滚">
                         
-                        <span class="card-title">ArrayList的remove</span>
+                        <span class="card-title">springboot中的事务回滚</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">问题起因闲来无事看起了java开发手册，发现一个有意思的地方，我整理了一下，大概如下：
-    public static void main(String[] args) {
-        List&lt;String> list = </div>
+                    <div class="summary">springboot中的事务回滚事务回滚在企业级开发中实用较为频繁，近段时间使用到了，总结一下：
+首先在springboot中是集成了事务的回滚操作了，也就是@Transactional注解。事务的回滚有两种方式，一种是自动回滚，另一种是手</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-16
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-18
                             </span>
                         <span class="publish-author">
                             
@@ -689,11 +721,16 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/arrayList%E7%9A%84remove/" target="_blank">
-                        <span class="chip bg-color">arrayList的remove</span>
+                    <a href="/tags/springboot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" target="_blank">
+                        <span class="chip bg-color">springboot事务回滚</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" target="_blank">
+                        <span class="chip bg-color">事务回滚</span>
                     </a>
                     
                 </div>
