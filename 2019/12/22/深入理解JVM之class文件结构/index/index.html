@@ -1058,6 +1058,28 @@ InnerClasses:
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'bee334a6b7324e756f3b',
+        clientSecret: 'ce80db76ae4b304e8130a051c07297576e80857a',
+        repo: 'blog-comments',
+        owner: 'Yansweb',
+        admin: ["Yansweb"],
+        id: '2019-12-22T19-04-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -1072,53 +1094,46 @@ InnerClasses:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;Current
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2019/12/22/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E4%B9%8Bclass%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/index/">
+                <a href="/2019/12/23/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/index/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="深入理解JVM之class文件结构">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="建造者模式">
                         
-                        <span class="card-title">深入理解JVM之class文件结构</span>
+                        <span class="card-title">建造者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">深入理解JVM之class文件结构概述​        虽然class文件结构很枯燥，但是如果你对这个一点都不了解，也是不行的，我还是硬着头皮看了看，我总结一下这玩意到底是怎么玩的。
-初识.class​        都知道java文件编译</div>
+                    <div class="summary">建造者模式概述建造者模式是创建型模式的一种，能够写出优美的函数式编程结构，增加代码的可读性。简单来说，用一个内部建造器来一步一步创建这个对象，建造器的作用就是创建好这个对象的属性，比如这个人入职了，她去办理入职手续，完成了哪一步就有了哪一步</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-23
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/jvm/" class="post-category" target="_blank">
-                                    jvm
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category" target="_blank">
+                                    设计模式
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/jvm/" target="_blank">
-                        <span class="chip bg-color">jvm</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
-                    <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA/" target="_blank">
-                        <span class="chip bg-color">深入理解java虚拟机</span>
-                    </a>
-                    
-                    <a href="/tags/class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_blank">
-                        <span class="chip bg-color">class文件结构</span>
+                    <a href="/tags/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_blank">
+                        <span class="chip bg-color">建造者模式</span>
                     </a>
                     
                 </div>
@@ -1184,43 +1199,6 @@ InnerClasses:
 </div>
 
 
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + 'From: yansdouble<br />'
-            + 'Author: double<br />'
-            + 'Link: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
     </div>
     <div class="col l3 hide-on-med-and-down">
         <div class="toc-widget">
@@ -1238,7 +1216,7 @@ InnerClasses:
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             // headingsOffset: -205,
-            headingSelector: 'h2, h3, h4'
+            headingSelector: 'h2, h3, h4, h5, h6'
         });
 
         // modify the toc link href to support Chinese.
@@ -1250,7 +1228,7 @@ InnerClasses:
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
+        $('#articleContent').children('h2, h3, h4, h5, h6').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1278,7 +1256,7 @@ InnerClasses:
         <div class="col s12 m8 l8 copy-right">
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">7k</span>
+                <span class="white-color">8.8k</span>
             
 
             
